@@ -10,18 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::group(['prefix' =>LaravelLocalization::setLocale(),
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-], function () {
-
-    Route::group(['prefix' => 'task'],function (){
-        Route::get('create','CrudController@create');
-        Route::post('store','CrudController@store')->name('task.store');
-    });
-});
+Route::get('userTask/{user_id}','Relation\RelationsController@getTask') -> name ('doctor.services');
 
 Route::post('delete','Relation\RelationsController@delete')->name('task.delete');
