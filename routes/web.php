@@ -10,7 +10,5 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('userTask/{user_id}','Relation\RelationsController@getTask') -> name ('doctor.services');
 
-Route::get('/', function () {
-    return view('welcome');
-});
