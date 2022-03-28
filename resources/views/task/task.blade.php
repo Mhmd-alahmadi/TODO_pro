@@ -54,6 +54,10 @@
 </style>
 @section('content')
 
+    <div class="alert alert-success">
+        {{Session::get('success')}}
+    </div>
+
     <div class="flex-center position-ref full-height">
 
         <div class="content">
@@ -75,8 +79,8 @@
                     <th scope="row">{{$tasks -> id}}</th>
                     <td>{{$tasks-> name}}</td>
                     <td style="display:none">{{$tasks -> type}}</td>
-                    <td><a href="{{}}" type="button" class="btn btn-info">update</a>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                    <td><a href="" type="button" class="btn btn-info">update</a>
+                        <a href="" task_id="{{$tasks -> id}}" class="delete_btn   btn btn-danger">Delete</a>
                         <button type="button" class="btn btn-warning">State</button>
                 </tr>
                     </td>
@@ -90,3 +94,31 @@
         </div>
     </div>
     @stop
+@section('scripts')
+    <script>
+
+        $(document).on('click','.delete_btn',function (e) {
+                e.preventDefault();
+
+            var $task_id = $(this).attr('task_id');
+                $.ajax({
+                    type: 'post',
+                    url: "{{route('task.delete')}}",
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'id': $task_id
+                    },
+
+                    success: function (data) {
+                            if(data.status == true){
+                                $('#success_msg').show();
+                            }
+                    }, error:function (reject) {
+
+                    }
+
+                })
+        })
+
+    </script>
+@stop

@@ -12,3 +12,4 @@
 */
 Route::get('userTask/{user_id}','Relation\RelationsController@getTask') -> name ('doctor.services');
 
+Route::post('delete','Relation\RelationsController@delete')->name('task.delete');
